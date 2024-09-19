@@ -1,0 +1,38 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.footer-koen {
+  background-color: #666666;
+}
+
+.background-chairs {
+  background-image: url("assets/header/header_afbeelding.jpg");
+  background-repeat: no-repeat;
+}
+
+.leerdam {
+  background-color: #b97d46;
+}
+
+.maarssen {
+  background-color: #9e2629;
+}
+
+.breukelen {
+  background-color: #8b9e51;
+}
+
+.bilthoven {
+  background-color: #6e4f7d;
+}
+
+.woerden {
+  background-color: #ff2525;
+}
+
+.leidsche {
+  background-color: #399cff;
+}
