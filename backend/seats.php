@@ -3,16 +3,17 @@ include './db/db_connect.php';
 session_start();
 
 $stmt = $conn->prepare("SELECT * FROM stoelen");
+
 $stmt->execute();
 $result = $stmt->get_result();
-
 $counter = 0;
 $rowstoelen = 0;
-
 if ($result->num_rows > 0) {
   while ($row = $result->fetch_assoc()) {
     $seatId = "seat-" . $row['id'];
-    $selected = in_array($row['id'], $_SESSION['selected_seats'] ?? []) ? 'selected' : '';
+
+    //in_array($row['id'], $_SESSION['selected_seats'] ?? []) ? 'selected' :
+    $selected =  in_array($row['id'], is_array($_SESSION['selected_seats']) ? $_SESSION['selected_seats'] : []) ? 'selected' : '';
     $taken = $row['taken'] ? 'taken' : '';
 
     $imageSrc = ($row["rij"] == 1 && ($row["stoel_Nr"] == 1 || $row["stoel_Nr"] == 2)) ? './assets/zalen/seat_invalide.png' : './assets/zalen/seat.png';

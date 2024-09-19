@@ -1,8 +1,6 @@
 <?php
-include('../db/db_connect.php');
-?>
+include('./db/db_connect.php');
 
-<?php
 $z_id = 2;
 
 $sqli_stoel = $con->prepare("SELECT koppel_z_s.id, stoelen.stoel_Nr FROM koppel_z_s
@@ -24,4 +22,3 @@ if ($sqli_stoel == false) {
 }
 
 $con->close();
-?>

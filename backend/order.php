@@ -1,8 +1,7 @@
 <?php
-session_start();
-include '../db/db_connect.php';
+include './db/db_connect.php';
 
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['firstname']) && $_POST['firstname'] != '') {
   $voornaam = $_POST['firstname'];
   $achternaam = $_POST['lastname'];
   $email = $_POST['email'];
@@ -18,18 +17,20 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
   $sql_klant->close();
 
   foreach ($selected_seats as $seat) {
+    list($seatId, $row, $seatNumber) = explode('-', $seat);
+
     $sql_reservering = $conn->prepare("INSERT INTO reservering (k_id, z_Nr, s_Nr, film, datum, klant_id) VALUES (?, ?, ?, ?, ?, ?)");
-    $z_Nr = 1;
-    $sql_reservering->bind_param("iiissi", $z_Nr, $seat, $seat, $film, $datum, $klant_id);
+    $sql_reservering->bind_param("iiissi", $klant_id, $row, $seatNumber, $film, $datum, $klant_id);
     $sql_reservering->execute();
     $sql_reservering->close();
-    $sql_update_seat = $conn->prepare("UPDATE stoelen SET taken = 1 WHERE id = ?");
-    $sql_update_seat->bind_param("i", $seat);
+
+    $sql_update_seat = $conn->prepare("UPDATE stoelen SET taken = 1 WHERE id = ? ");
+    $sql_update_seat->bind_param("i", $seatId);
     $sql_update_seat->execute();
     $sql_update_seat->close();
   }
 
   $conn->close();
-  header("Location: ../tickets.php");
-  exit();
+  // header("Location: ../confirmation.php");
+  // exit();
 }

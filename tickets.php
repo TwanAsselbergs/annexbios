@@ -127,7 +127,7 @@ include 'backend/order.php'
             <?php include 'backend/seats.php' ?>
           </div>
         </div>
-        <form action="confirmation.php" method="POST" name="checkout-form">
+        <form action="tickets.php" method="POST" name="checkout-form">
           <input type="hidden" id="selected-seats-input" name="selected_seats" value="">
           <h2 class="font-semibold text-3xl pt-16 pb-8 text-customBlue">Stap 3: Controleer Je Bestelling</h2>
           <div class="w-1/2 p-2 text-gray-500">

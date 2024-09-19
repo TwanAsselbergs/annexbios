@@ -165,7 +165,9 @@ function selectSeat(seatElement) {
 
 function updateSelectedSeatsInput() {
   const selectedSeatsInput = document.getElementById("selected-seats-input");
-  const seatNumbers = selectedSeats.map((seat) => seat.seatNumber).join(",");
+  const seatNumbers = selectedSeats
+    .map((seat) => `${seat.seatId}-${seat.row}-${seat.seatNumber}`)
+    .join(",");
   selectedSeatsInput.value = seatNumbers;
 }
 
