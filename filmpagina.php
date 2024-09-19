@@ -34,17 +34,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $implodedGenreNames = [];
   $implodedActorNames = [];
   $implodeddirectorNames = [];
+  $actorImages = [];
 
   if (isset($movieSpecific[0])) {
     if (isset($movieSpecific[0]['genres'])) {
       foreach ($movieSpecific[0]['genres'] as $genre) {
-        $implodedGenreNames[] = $genre;
+        $implodedGenreNames[] = $genre['name'];
       }
     }
 
     if (isset($movieSpecific[0]['actors'])) {
       foreach ($movieSpecific[0]['actors'] as $actor) {
         $implodedActorNames[] = $actor['name'];
+        if (count($actorImages) < 3) {
+          $actorImages[] = $actor['image'];
+        }
       }
     }
 
@@ -59,9 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   $movieSpecific = null;
 }
 
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -84,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       </div>
       <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 mx-4 mt-10 md:mx-32">
         <div class="text-black bg-white rounded">
-          <img src="<?= $movieSpecific[0]['image'] ?>" alt="Movie Image" class="rounded w-full">
+          <img src="<?= $movieSpecific[0]['image'] ?>" alt="Movie Image" class="rounded w-full h-full">
         </div>
         <div class="text-black bg-white w-full rounded p-5">
           <div class="flex flex-row flex-wrap space-x-2">
@@ -99,38 +101,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <img src="assets/kijkwijzers/kijkwijzer-eng.png" alt="" class="w-8 h-8 md:w-10 md:h-10">
             <img src="assets/kijkwijzers/kijkwijzer-geweld.png" alt="" class="w-8 h-8 md:w-10 md:h-10">
           </div>
-          <h3 class="text-black pt-10 text-lg md:text-xl">Release: <?= htmlspecialchars($movieSpecific[0]['release_date'] ?? 'N/A') ?></h3>
-          <p class="text-black pt-5 text-xs md:text-sm"><?= htmlspecialchars($movieSpecific[0]['description'] ?? 'N/A') ?></p>
+          <h3 class="text-black pt-10 text-lg font-bold md:text-xl">Release: <?= htmlspecialchars($movieSpecific[0]['release_date'] ?? 'N/A') ?></h3>
+          <p class="text-black pt-5 font-semibold text-xs md:text-lg">Description:
+          <div class="text-black text-xs md:text-lg"><?= htmlspecialchars($movieSpecific[0]['description'] ?? 'N/A') ?></div>
+          </p>
           <div class="text-black flex flex-col pt-5 text-xs md:text-sm">
-            <?php
-            $flattenedGenreNames = array_merge(...$implodedGenreNames);
-            ?>
-            <p>Genre: <?= htmlspecialchars(implode(', ', $flattenedGenreNames)) ?></p>
-            <p>Filmlengte: <?= htmlspecialchars($movieSpecific[0]['length'] ?? 'N/A') ?> minuten</p>
-            <p>Imdb score: <?= htmlspecialchars($movieSpecific[0]['rating'] ?? 'N/A') ?>/10</p>
-            <p>Regisseur: <?= htmlspecialchars(implode(', ', $implodeddirectorNames)) ?></p>
-            <p>Acteurs: <?= htmlspecialchars(implode(', ', $implodedActorNames)) ?></p>
+            <p class="text-black pt-4 font-semibold text-xs md:text-lg">Genre:
+            <div class="text-black text-xs md:text-base"><?= htmlspecialchars(implode(', ', $implodedGenreNames)) ?></div>
+            </p>
+            <p class="text-black pt-4 font-semibold text-xs md:text-lg">Filmlengte:
+            <div class="text-black text-xs md:text-base"><?= htmlspecialchars($movieSpecific[0]['length'] ?? 'N/A') ?></div>
+            </p>
+            <p class="text-black pt-4 font-semibold text-xs md:text-lg">Rating:
+            <div class="text-black text-xs md:text-base"><?= htmlspecialchars($movieSpecific[0]['rating'] ?? 'N/A') ?></div>
+            </p>
+            <p class="text-black pt-4 font-semibold text-xs md:text-lg">Regisseur:
+            <div class="text-black text-xs md:text-base"><?= htmlspecialchars(implode(', ', $implodeddirectorNames)) ?></div>
+            </p>
+            <p class="text-black pt-4 font-semibold text-xs md:text-lg">Acteurs:
+            <div class="text-black text-xs md:text-base"><?= htmlspecialchars(implode(', ', $implodedActorNames)) ?></div>
+            </p>
+            <div class="flex flex-row flex-wrap space-x-3 pt-5">
+              <?php foreach ($actorImages as $image): ?>
+                <img src="<?= htmlspecialchars($image) ?>" alt="Actor Image" class=" w-16 h-32 md:w-32 md:h-48 rounded">
+              <?php endforeach; ?>
+            </div>
           </div>
         </div>
       </div>
       <div class="md:mx-32">
         <form action="tickets.php" method="POST" style="display: inline;">
-          <input type="hidden" name="id" value="<?= htmlspecialchars($movieSpecific['api_id']) ?>">
-          <input type="hidden" name="title" value="<?= htmlspecialchars($movieSpecific['title']) ?>">
-          <input type="hidden" name="release_date" value="<?= htmlspecialchars(date('Y-m-d', strtotime($movieSpecific['release_date']))) ?>">
-          <input type="hidden" name="description" value="<?= htmlspecialchars($movieSpecific['description']) ?>">
-          <input type="hidden" name="genre" value="<?= htmlspecialchars($movieSpecific['genres']) ?>">
-          <input type="hidden" name="duration" value="<?= htmlspecialchars($movieSpecific['duration']) ?>">
-          <input type="hidden" name="images" value="<?= htmlspecialchars($movieSpecific['image']) ?>">
-          <input type="hidden" name="actors" value="<?= htmlspecialchars($movieSpecific['actors']) ?>">
-          <input type="hidden" name="director" value="<?= htmlspecialchars($movieSpecific['director']) ?>">
-          <input type="hidden" name="imdb_score" value="<?= htmlspecialchars($movieSpecific['imdb_score']) ?>">
-          <input type="hidden" name="trailer_url" value="<?= htmlspecialchars($movieSpecific['trailer_link']) ?>">
-          <button type="submit" class="bg-customBlue hover:bg-customBlueLight transition text-white rounded text-center text-lg md:text-3xl pt-3 pb-3 md:pt-5 md:pb-5 w-full font-bold">Koop je tickets</button>
+          <input type="hidden" name="api_id" value="<?= htmlspecialchars($movieSpecific[0]['api_id'] ?? '') ?>">
+          <button type="submit" class="bg-customBlue hover:bg-customBlueLight transition text-white rounded text-center text-lg mt-10 md:text-3xl pt-3 pb-3 md:pt-5 md:pb-5 w-full font-bold">Koop je tickets</button>
         </form>
       </div>
       <div class="bg-white mt-10 mx-4 md:mx-32">
-        <iframe class="w-full h-80" src="<?= htmlspecialchars($movieSpecific['trailer_link'] ?? '') ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <iframe class="w-full h-80" src="<?= htmlspecialchars($movieSpecific[0]['embedded_trailer_link'] ?? '') ?>" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
       </div>
     <?php else: ?>
       <p class="text-white text-center text-2xl">Movie not found or error fetching movie details.</p>
@@ -138,3 +144,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
   </div>
   <?php include 'src/root/footer.php'; ?>
 </body>
+
+</html>

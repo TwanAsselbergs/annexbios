@@ -1,6 +1,6 @@
 <?php
 include './db/db_connect.php';
-session_start();
+// session_start();
 
 $stmt = $conn->prepare("SELECT * FROM stoelen");
 

@@ -1,8 +1,85 @@
 <?php
 session_start();
-include 'backend/order.php'
+use function PHPSTORM_META\type;
+
+include 'backend/order.php';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+  if (isset($_POST['api_id'])) {
+    $id = htmlspecialchars($_POST['api_id']);
+
+    $api_url = 'https://annexbios.nickvz.nl/api/v1/movieData/' . $id;
+
+    $ch = curl_init($api_url);
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, [
+      'Content-Type: application/json',
+      'Accept: application/json',
+      'Authorization: Bearer 8880ea08bcfc00eb4de4aa5994796ef6b2f24c4509506dcf203888de0a947db5'
+    ]);
+
+    $response = curl_exec($ch);
+
+    if ($response === false) {
+      echo 'Error fetching data from API: ' . curl_error($ch);
+      $movieTickets = [];
+    } else {
+      $responseDecoded = json_decode($response, true);
+      $movieTickets = $responseDecoded['data'] ?? [];
+
+      if (is_null($movieTickets)) {
+        $movieTickets = [];
+      }
+    }
+
+    curl_close($ch);
+
+    $implodedGenreNames = [];
+    $implodedActorNames = [];
+    $implodeddirectorNames = [];
+
+    if (isset($movieTickets[0]['genres'])) {
+      foreach ($movieTickets[0]['genres'] as $genre) {
+        $implodedGenreNames[] = $genre;
+      }
+    }
+
+    if (isset($movieTickets[0]['actors'])) {
+      foreach ($movieTickets[0]['actors'] as $actor) {
+        $implodedActorNames[] = $actor['name'];
+      }
+    }
+
+    if (isset($movieTickets[0]['directors'])) {
+      foreach ($movieTickets[0]['directors'] as $director) {
+        $implodeddirectorNames[] = $director['name'];
+      }
+    }
+  } else {
+    echo 'Error: api_id is not set in the POST request.';
+  }
+} else {
+  echo 'Invalid request method';
+  $movieTickets = null;
+}
 ?>
 
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="output.css" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <script src="js/script.js" defer></script>
+</head>
+
+<body>
+  <!-- Your HTML content here -->
+</body>
+
+</html>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -132,16 +209,16 @@ include 'backend/order.php'
           <h2 class="font-semibold text-3xl pt-16 pb-8 text-customBlue">Stap 3: Controleer Je Bestelling</h2>
           <div class="w-1/2 p-2 text-gray-500">
             <div class="flex">
-              <img src="assets/films/Jurassic-World_-Fallen-Kingdom.jpg" alt="Film" class="w-2/6 rounded">
+              <img src="<?= htmlspecialchars($movieTickets[0]['image'] ?? 'N/A') ?>" alt="Film" class="w-2/6 rounded">
               <div class="ml-4 flex flex-col justify-center">
-                <h3 class="text-3xl font-semibold">Jurassic World: Fallen Kingdom</h3>
+                <h3 class="text-3xl font-semibold"><?= htmlspecialchars($movieTickets[0]['title'] ?? 'N/A') ?></h3>
                 <div class="flex space-x-2 pt-4 pb-4">
                   <img src="assets/kijkwijzers/kijkwijzer-12.png" alt="12" class="w-12 h-12">
                   <img src="assets/kijkwijzers/kijkwijzer-eng.png" alt="Eng" class="w-12 h-12">
                   <img src="assets/kijkwijzers/kijkwijzer-geweld.png" alt="Geweld" class="w-12 h-12">
                 </div>
                 <p><span class="font-semibold">Bioscoop:</span> Montfoort (Zaal 1)</p>
-                <p><span class="font-semibold">Wanneer:</span> 11 juni 14:15</p>
+                <p><span class="font-semibold">Wanneer:</span><?= htmlspecialchars($movieTickets[0]['first_play_time'] ?? 'N/A')?></p>
                 <p><span class="font-semibold">Stoelen:</span> <span id="selected-seats">-</span></p>
                 <div><span class="font-semibold">Tickets:</span> <span id="total-tickets">-</span></div>
                 <p class="pt-4"><span class="font-semibold">Totaal:</span> €<span id="total-price">-</span></p>
