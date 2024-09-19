@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "annexbios3";
+$dbname = "annexbios";
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

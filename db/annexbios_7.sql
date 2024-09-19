@@ -368,7 +368,7 @@ CREATE TABLE `stoelen` (
   `id` int(11) UNSIGNED NOT NULL,
   `rij` int(10) UNSIGNED NOT NULL,
   `stoel_Nr` int(10) UNSIGNED NOT NULL,
-  `taken` tinyint(1) DEFAULT 0,
+  `bezet` tinyint(1) DEFAULT 0,
   `film` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -376,7 +376,7 @@ CREATE TABLE `stoelen` (
 -- Dumping data for table `stoelen`
 --
 
-INSERT INTO `stoelen` (`id`, `rij`, `stoel_Nr`, `taken`, `film`) VALUES
+INSERT INTO `stoelen` (`id`, `rij`, `stoel_Nr`, `bezet`, `film`) VALUES
 (1, 1, 1, 1, NULL),
 (2, 1, 2, 1, NULL),
 (3, 1, 3, 1, NULL),

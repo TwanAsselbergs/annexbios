@@ -26,7 +26,7 @@
           <p class="pt-6 pl-6 hover:underline cursor-pointer"><a href="contact.php">Rijksstraatweg 42</a></p>
           <p class="pl-6">3223 KA Hellevoetsluis</p>
           <p class="pt-4 pl-6 hover:underline cursor-pointer"><a href="tel:02012345678">020-12345678</a></p>
-          <p class="font-bold pt-4 text-lg pl-6">Bereikbaarheid</p>
+          <p class="font-bold pt-4 text-lg pl-6 pb-4">Bereikbaarheid</p>
           <p class="pb-4 md:pb-0 pl-6 pr-2 md:pr-0">Onze bioscoop is gemakkelijk bereikbaar met zowel het openbaar vervoer als met de auto. Er is voldoende parkeergelegenheid in de buurt.</p>
         </div>
         <img src="assets/maps/tivoli.png" alt="Tivoli" class="rounded  md:w-1/2 mb-8 md:mb-0 md:ml-12">

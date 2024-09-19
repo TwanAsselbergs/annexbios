@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 use function PHPSTORM_META\type;
 
 include 'backend/order.php';
@@ -61,6 +62,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
   echo 'Invalid request method';
   $movieTickets = null;
+}
+
+$firstPlayTime = $movieTickets[0]['first_play_time'] ?? 'N/A';
+$formattedDateTime = 'N/A';
+
+if ($firstPlayTime !== 'N/A') {
+  $dateTime = new DateTime($firstPlayTime);
+  $formattedDate = $dateTime->format('Y-m-d');
+  $formattedTime = $dateTime->format('H:i');
+  $formattedDateTime = $formattedDate . ' ' . $formattedTime;
 }
 ?>
 
@@ -206,6 +217,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <form action="tickets.php" method="POST" name="checkout-form">
           <input type="hidden" id="selected-seats-input" name="selected_seats" value="">
+          <input type="hidden" id="movie-name" name="movie_name" value="<?= htmlspecialchars($movieTickets[0]['title'] ?? 'N/A') ?>">
           <h2 class="font-semibold text-3xl pt-16 pb-8 text-customBlue">Stap 3: Controleer Je Bestelling</h2>
           <div class="w-1/2 p-2 text-gray-500">
             <div class="flex">
@@ -218,7 +230,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                   <img src="assets/kijkwijzers/kijkwijzer-geweld.png" alt="Geweld" class="w-12 h-12">
                 </div>
                 <p><span class="font-semibold">Bioscoop:</span> Montfoort (Zaal 1)</p>
-                <p><span class="font-semibold">Wanneer:</span><?= htmlspecialchars($movieTickets[0]['first_play_time'] ?? 'N/A')?></p>
+                <p><span class="font-semibold">Wanneer: </span><?= htmlspecialchars($formattedDateTime) ?></p>
                 <p><span class="font-semibold">Stoelen:</span> <span id="selected-seats">-</span></p>
                 <div><span class="font-semibold">Tickets:</span> <span id="total-tickets">-</span></div>
                 <p class="pt-4"><span class="font-semibold">Totaal:</span> €<span id="total-price">-</span></p>

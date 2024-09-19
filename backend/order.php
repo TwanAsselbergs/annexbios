@@ -7,7 +7,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['firstname']) && $_POS
   $email = $_POST['email'];
   $tel = $_POST['tel'];
   $selected_seats = explode(',', $_POST['selected_seats']);
-  $film = "Jurassic World";
+  $film = $_POST['movie_name'];
   $datum = date('Y-m-d');
 
   $sql_klant = $conn->prepare("INSERT INTO klanten (v_naam, a_naam, email, t_nummer) VALUES (?, ?, ?, ?)");
@@ -18,18 +18,16 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['firstname']) && $_POS
 
   foreach ($selected_seats as $seat) {
     list($seatId, $row, $seatNumber) = explode('-', $seat);
-
     $sql_reservering = $conn->prepare("INSERT INTO reservering (k_id, z_Nr, s_Nr, film, datum, klant_id) VALUES (?, ?, ?, ?, ?, ?)");
     $sql_reservering->bind_param("iiissi", $klant_id, $row, $seatNumber, $film, $datum, $klant_id);
     $sql_reservering->execute();
     $sql_reservering->close();
 
-    $sql_update_seat = $conn->prepare("UPDATE stoelen SET taken = 1 WHERE id = ? ");
+    $sql_update_seat = $conn->prepare("UPDATE stoelen SET bezet = 1 WHERE id = ? ");
     $sql_update_seat->bind_param("i", $seatId);
     $sql_update_seat->execute();
     $sql_update_seat->close();
   }
-
   $conn->close();
   // header("Location: ../confirmation.php");
   // exit();

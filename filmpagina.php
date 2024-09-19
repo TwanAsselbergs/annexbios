@@ -90,40 +90,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <div class="text-black bg-white w-full rounded p-5">
           <div class="flex flex-row flex-wrap space-x-2">
-            <img src="assets/logo/ster.png" alt="" class="w-12 h-12 md:w-20 md:h-20">
-            <img src="assets/logo/ster.png" alt="" class="w-12 h-12 md:w-20 md:h-20">
-            <img src="assets/logo/ster.png" alt="" class="w-12 h-12 md:w-20 md:h-20">
-            <img src="assets/logo/ster.png" alt="" class="w-12 h-12 md:w-20 md:h-20">
-            <img src="assets/logo/openster.png" alt="" class="w-12 h-12 md:w-20 md:h-20">
+            <img src="assets/logo/ster.png" alt="" class="w-15 h-12">
+            <img src="assets/logo/ster.png" alt="" class="w-15 h-12">
+            <img src="assets/logo/ster.png" alt="" class="w-15 h-12">
+            <img src="assets/logo/ster.png" alt="" class="w-15 h-12">
+            <img src="assets/logo/openster.png" alt="" class="w-15 h-12">
           </div>
-          <div class="flex flex-row flex-wrap space-x-3 pt-5">
+          <div class="flex flex-row flex-wrap space-x-3 pt-5 pl-2">
             <img src="assets/kijkwijzers/kijkwijzer-12.png" alt="" class="w-8 h-8 md:w-10 md:h-10">
             <img src="assets/kijkwijzers/kijkwijzer-eng.png" alt="" class="w-8 h-8 md:w-10 md:h-10">
             <img src="assets/kijkwijzers/kijkwijzer-geweld.png" alt="" class="w-8 h-8 md:w-10 md:h-10">
           </div>
-          <h3 class="text-black pt-10 text-lg font-bold md:text-xl">Release: <?= htmlspecialchars($movieSpecific[0]['release_date'] ?? 'N/A') ?></h3>
-          <p class="text-black pt-5 font-semibold text-xs md:text-lg">Description:
+          <h3 class="pt-10 text-lg font-bold md:text-4xl text-gray-500">Release: <?= htmlspecialchars($movieSpecific[0]['release_date'] ?? 'N/A') ?></h3>
+          <p class="text-black pt-5 font-semibold text-xs md:text-3xl text-customBlue pb-2">Beschrijving:
           <div class="text-black text-xs md:text-lg"><?= htmlspecialchars($movieSpecific[0]['description'] ?? 'N/A') ?></div>
           </p>
-          <div class="text-black flex flex-col pt-5 text-xs md:text-sm">
-            <p class="text-black pt-4 font-semibold text-xs md:text-lg">Genre:
+          <div class="text-black flex flex-col text-xs md:text-sm">
+            <p class="text-black pt-4 font-semibold md:text-3xl text-customBlue pb-2">Genre:
             <div class="text-black text-xs md:text-base"><?= htmlspecialchars(implode(', ', $implodedGenreNames)) ?></div>
             </p>
-            <p class="text-black pt-4 font-semibold text-xs md:text-lg">Filmlengte:
-            <div class="text-black text-xs md:text-base"><?= htmlspecialchars($movieSpecific[0]['length'] ?? 'N/A') ?></div>
+            <p class="text-black pt-4 font-semibold text-xs md:text-3xl text-customBlue pb-2">Filmlengte:
+            <div class="text-black text-xs md:text-base"><?= htmlspecialchars($movieSpecific[0]['length'] ?? 'N/A') ?> minuten</div>
             </p>
-            <p class="text-black pt-4 font-semibold text-xs md:text-lg">Rating:
-            <div class="text-black text-xs md:text-base"><?= htmlspecialchars($movieSpecific[0]['rating'] ?? 'N/A') ?></div>
+            <p class="text-black pt-4 font-semibold text-xs md:text-3xl text-customBlue pb-2">Rating:
+            <div class="text-black text-xs md:text-base"><?= htmlspecialchars($movieSpecific[0]['rating'] ?? 'N/A') ?> / 10</div>
             </p>
-            <p class="text-black pt-4 font-semibold text-xs md:text-lg">Regisseur:
+            <p class="text-black pt-4 font-semibold text-xs md:text-3xl text-customBlue pb-2">Regisseur:
             <div class="text-black text-xs md:text-base"><?= htmlspecialchars(implode(', ', $implodeddirectorNames)) ?></div>
             </p>
-            <p class="text-black pt-4 font-semibold text-xs md:text-lg">Acteurs:
+            <p class="text-black pt-4 font-semibold text-xs md:text-3xl text-customBlue pb-2">Acteurs:
             <div class="text-black text-xs md:text-base"><?= htmlspecialchars(implode(', ', $implodedActorNames)) ?></div>
             </p>
-            <div class="flex flex-row flex-wrap space-x-3 pt-5">
+            <div class="flex flex-row flex-wrap space-x-3">
               <?php foreach ($actorImages as $image): ?>
-                <img src="<?= htmlspecialchars($image) ?>" alt="Actor Image" class=" w-16 h-32 md:w-32 md:h-48 rounded">
+                <img src="<?= htmlspecialchars($image) ?>" alt="Actor Image" class="w-32 h-48 rounded mt-6">
               <?php endforeach; ?>
             </div>
           </div>
@@ -132,7 +132,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
       <div class="md:mx-32">
         <form action="tickets.php" method="POST" style="display: inline;">
           <input type="hidden" name="api_id" value="<?= htmlspecialchars($movieSpecific[0]['api_id'] ?? '') ?>">
-          <button type="submit" class="bg-customBlue hover:bg-customBlueLight transition text-white rounded text-center text-lg mt-10 md:text-3xl pt-3 pb-3 md:pt-5 md:pb-5 w-full font-bold">Koop je tickets</button>
+          <button type="submit" class="bg-customBlue hover:bg-customBlueLight transition text-white rounded text-center text-lg mt-10 md:text-3xl pt-3 pb-3 md:pt-5 md:pb-5 w-full font-bold">Koop Je Tickets</button>
         </form>
       </div>
       <div class="bg-white mt-10 mx-4 md:mx-32">
