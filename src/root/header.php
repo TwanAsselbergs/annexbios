@@ -79,7 +79,7 @@ curl_close($ch);
         </select>
         <form id="movie-form" action="agenda.php" method="POST" onsubmit="return validateForm()">
           <input type="hidden" name="id" id="movie-api_id">
-          <button type="submit" class="bg-white hover:bg-blue text-customBlue px-3 py-1 rounded text-sm md:text-base md:w-auto font-bold">Bestel Ticket</button>
+          <button type="submit" class="bg-white hover:bg-gray-100 text-customBlue px-3 py-1 rounded text-sm md:text-base md:w-auto font-bold">Bestel Ticket</button>
         </form>
       </div>
     </div>
