@@ -286,7 +286,7 @@ if ($firstPlayTime !== 'N/A') {
       </div>
       </div>
       <div class="w-11/12 md:w-5/6">
-        <button id="checkout-button" class="bg-customBlue text-white text-center rounded p-8 text-4xl font-bold w-full">Afrekenen</button>
+        <button id="checkout-button" class="bg-customBlue hover:bg-customBlueLight text-white text-center rounded p-8 text-4xl font-bold w-full">Afrekenen</button>
       </div>
       </form>
     </section>

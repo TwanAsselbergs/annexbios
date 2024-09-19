@@ -10,6 +10,7 @@ $rowstoelen = 0;
 if ($result->num_rows > 0) {
   while ($row = $result->fetch_assoc()) {
     $seatId = "seat-" . $row['id'];
+
     $selected =  in_array($row['id'], is_array($_SESSION['selected_seats']) ? $_SESSION['selected_seats'] : []) ? 'selected' : '';
     $bezet = $row['bezet'] ? 'bezet' : '';
 
