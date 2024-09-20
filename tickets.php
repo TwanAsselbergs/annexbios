@@ -75,7 +75,6 @@ if ($firstPlayTime !== 'N/A') {
 }
 ?>
 
-</html>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -200,7 +199,7 @@ if ($firstPlayTime !== 'N/A') {
             <?php include 'backend/seats.php' ?>
           </div>
         </div>
-        <form action="tickets.php" method="POST" name="checkout-form">
+        <form action="confirmation.php" method="POST" name="checkout-form">
           <input type="hidden" id="selected-seats-input" name="selected_seats" value="">
           <input type="hidden" id="movie-name" name="movie_name" value="<?= htmlspecialchars($movieTickets[0]['title'] ?? 'N/A') ?>">
           <h2 class="font-semibold text-3xl pt-16 pb-8 text-customBlue">Stap 3: Controleer Je Bestelling</h2>
