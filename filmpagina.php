@@ -90,11 +90,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
         <div class="text-black bg-white w-full rounded p-5">
           <div class="flex flex-row flex-wrap space-x-2">
-            <img src="assets/logo/ster.png" alt="" class="w-8 h-7 md:w-15 md:h-12">
-            <img src="assets/logo/ster.png" alt="" class="w-8 h-7 md:w-15 md:h-12">
-            <img src="assets/logo/ster.png" alt="" class="w-8 h-7 md:w-15 md:h-12">
-            <img src="assets/logo/ster.png" alt="" class="w-8 h-7 md:w-15 md:h-12">
-            <img src="assets/logo/openster.png" alt="" class="w-8 h-7 md:w-15 md:h-12">
+            <img src="assets/logo/ster.png" alt="" class="w-8 h-7 md:w-18 md:h-10">
+            <img src="assets/logo/ster.png" alt="" class="w-8 h-7 md:w-18 md:h-10">
+            <img src="assets/logo/ster.png" alt="" class="w-8 h-7 md:w-18 md:h-10">
+            <img src="assets/logo/ster.png" alt="" class="w-8 h-7 md:w-18 md:h-10">
+            <img src="assets/logo/openster.png" alt="" class="w-8 h-7 md:w-18 md:h-10">
           </div>
           <div class="flex flex-row flex-wrap space-x-3 pt-5 pl-2">
             <img src="assets/kijkwijzers/kijkwijzer-12.png" alt="" class="w-8 h-8 md:w-10 md:h-10">
@@ -123,7 +123,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </p>
             <div class="flex flex-row flex-wrap space-x-3">
               <?php foreach ($actorImages as $image): ?>
-                <img src="<?= htmlspecialchars($image) ?>" alt="Actor Image" class="w-16 h-18 md:w-32 md:h-48 rounded mt-6">
+                <img src="<?= htmlspecialchars($image) ?>" alt="Actor Image" class="w-16 h-18 md:w-24 md:h-32 rounded mt-12">
               <?php endforeach; ?>
             </div>
           </div>
