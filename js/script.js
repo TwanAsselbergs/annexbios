@@ -277,7 +277,8 @@ function validateForm() {
 }
 
 function showModal() {
-  document.getElementById("no-movie-modal").classList.remove("hidden");
+  const modal = document.getElementById("custom-modal");
+  modal.classList.remove("hidden");
 }
 
 function closeModal() {

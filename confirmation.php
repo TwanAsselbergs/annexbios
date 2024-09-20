@@ -49,14 +49,13 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['firstname']) && $_POS
     <section class="w-full md:pt-36 pb-12 md:pb-36 bg-black flex flex-col items-center justify-center background-chairs">
       <div class="bg-customBlue p-6 md:p-14 rounded w-11/12 md:w-5/6 mt-12 mt-48">
         <h1 class="text-white text-3xl md:text-6xl font-bold">Bedankt voor je bestelling, <?= htmlspecialchars($voornaam) ?>!</h1>
-        <p class="text-white mt-6 mb-10">Je tickets zijn naar <?= htmlspecialchars($email) ?> verzonden.</p>
+        <p class="text-white mt-6 mb-10 text-lg">Je tickets zijn naar <?= htmlspecialchars($email) ?> verzonden.</p>
         <div class="bg-white p-6 rounded text-customBlue space-y-2">
-          <h2 class="text-2xl font-bold mb-4">Bestelgegevens</h2>
-          <p><strong>Naam:</strong> <?= htmlspecialchars($voornaam) ?> <?= htmlspecialchars($achternaam) ?></p>
-          <p><strong>E-mail:</strong> <?= htmlspecialchars($email) ?></p>
-          <p><strong>Telefoonnummer:</strong> <?= htmlspecialchars($tel) ?></p>
-          <p><strong>Geselecteerde Stoelen:</strong> <?= htmlspecialchars(implode(', ', $selected_seats)) ?></p>
-          <p><strong>Film:</strong> <?= htmlspecialchars($film) ?></p>
+          <h2 class="text-3xl font-bold mb-4">Bestelgegevens</h2>
+          <p class="text-lg"><strong>Naam:</strong> <span class="text-black"><?= htmlspecialchars($voornaam) ?> <?= htmlspecialchars($achternaam) ?></span></p>
+          <p class="text-lg"><strong>E-mail:</strong> <span class="text-black"><?= htmlspecialchars($email) ?></span></p>
+          <p class="text-lg"><strong>Telefoonnummer:</strong> <span class="text-black"><?= htmlspecialchars($tel) ?></span></p>
+          <p class="text-lg"><strong>Film:</strong> <span class="text-black"><?= htmlspecialchars($film) ?></span></p>
         </div>
       </div>
     </section>

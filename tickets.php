@@ -135,6 +135,7 @@ if ($firstPlayTime !== 'N/A') {
               <div class="w-2/3 flex justify-end space-x-5">
                 <p>€9,00</p>
                 <select class="ticket-amount font-semibold pl-4 pr-1 rounded bg-white text-customBlue cursor-pointer" data-price="9.00">
+                  <option>0</option>
                   <option>1</option>
                   <option>2</option>
                   <option>3</option>
@@ -154,6 +155,7 @@ if ($firstPlayTime !== 'N/A') {
               <div class="w-2/3 flex justify-end space-x-5">
                 <p>€5,00</p>
                 <select class="ticket-amount font-semibold pl-4 pr-1 rounded bg-white text-customBlue cursor-pointer" data-price="5.00">
+                  <option>0</option>
                   <option>1</option>
                   <option>2</option>
                   <option>3</option>
@@ -173,6 +175,7 @@ if ($firstPlayTime !== 'N/A') {
               <div class="w-2/3 flex justify-end space-x-5">
                 <p>€7,00</p>
                 <select class="ticket-amount font-semibold pl-4 pr-1 rounded bg-white text-customBlue cursor-pointer" data-price="7.00">
+                  <option>0</option>
                   <option>1</option>
                   <option>2</option>
                   <option>3</option>
@@ -195,7 +198,7 @@ if ($firstPlayTime !== 'N/A') {
           <h2 class="font-semibold text-3xl pt-16">Stap 2: Kies Je Stoel</h2>
           <h2 class="text-4xl font-semibold text-center pb-2 pt-8 ml-16">Filmdoek</h2>
           <hr class="pb-8 h-4">
-          <div class="grid grid-cols-12 w-1/2 ml-96 mt-4" id="seat-selection">
+          <div class="grid grid-cols-12 w-full md:w-1/2 ml-18 md:ml-96 mt-4" id="seat-selection">
             <?php include 'backend/seats.php' ?>
           </div>
         </div>
