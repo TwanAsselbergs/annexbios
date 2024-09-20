@@ -16,9 +16,22 @@
       <div class="bg-customBlue p-6 md:p-14 rounded w-11/12 md:w-5/6 mt-48">
         <h1 class="text-white text-3xl md:text-6xl font-bold">Welkom bij AnnexBios Montfoort</h1>
         <p class="text-white mt-6 mb-12">Welkom bij AnnexBios Montfoort, waar filmervaringen tot leven komen. Geniet van de nieuwste films in een comfortabele en moderne omgeving.</p>
-        <a href="agenda.php" class="p-3 w-48 md:w-24 text-center bg-white text-customBlue hover:bg-gray-100 rounded font-bold">
-          Bekijk Draaiende Films
-        </a>
+        <form action="agenda.php" method="POST" style="display: inline;">
+          <input type="hidden" name="id" value="<?= htmlspecialchars($movie['id'] ?? '') ?>">
+          <input type="hidden" name="title" value="<?= htmlspecialchars($movie['title'] ?? 'N/A') ?>">
+          <input type="hidden" name="release_date" value="<?= htmlspecialchars(date('Y-m-d', strtotime($movie['release_date'] ?? ''))) ?>">
+          <input type="hidden" name="description" value="<?= htmlspecialchars($movie['description'] ?? 'N/A') ?>">
+          <input type="hidden" name="genre" value="<?= htmlspecialchars(json_encode($movie['genres'] ?? 'N/A')) ?>">
+          <input type="hidden" name="duration" value="<?= htmlspecialchars($movie['duration'] ?? 'N/A') ?>">
+          <input type="hidden" name="images" value="<?= htmlspecialchars($movie['banner_path'] ?? 'assets/films/default.jpg') ?>">
+          <input type="hidden" name="actors" value="<?= htmlspecialchars(json_encode($movie['actors'] ?? 'N/A')) ?>">
+          <input type="hidden" name="director" value="<?= htmlspecialchars(json_encode($movie['directors'] ?? 'N/A')) ?>">
+          <input type="hidden" name="imdb_score" value="<?= htmlspecialchars($movie['rating'] ?? 'N/A') ?>">
+          <input type="hidden" name="trailer_url" value="<?= htmlspecialchars($movie['trailer_link'] ?? 'N/A') ?>">
+          <button type="submit" class="p-3 w-48 text-center bg-white text-customBlue hover:bg-gray-100 rounded font-bold">
+            Bekijk Draaiende Films
+          </button>
+        </form>
       </div>
       <div class="bg-white p-8 rounded w-11/12 md:w-5/6 mt-12 flex flex-col-reverse md:flex-row">
         <div class="bg-customBlue w-full md:w-1/2 rounded text-white">
