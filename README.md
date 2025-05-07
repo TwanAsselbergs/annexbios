@@ -4,7 +4,6 @@
 ## Table of Contents
 
   - [Overview](#overview)
-  - [Project](#project)
   - [Author(s)](#authors)
   - [License](#license)
 
