@@ -26,6 +26,8 @@ AnnexBios was built as a school project with two other students. It is made for 
 ## Author(s)
 
 - **Twan Asselbergs** - [TwanAsselbergs](https://github.com/TwanAsselbergs)
+- **Geno Kooijman**
+- **Marijn Willems**
 
 
 ## License
